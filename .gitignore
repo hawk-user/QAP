@@ -1,0 +1,56 @@
+# macOS: Finder metadata
+.DS_Store
+
+# macOS: AppleDouble resource fork files
+.AppleDouble
+
+# macOS: Finder settings override
+.LSOverride
+
+# macOS: resource fork files on non-HFS systems
+._*
+
+# macOS: Spotlight indexing metadata
+.Spotlight-V100
+
+# macOS: Trash folder on external volumes
+.Trashes
+
+# macOS: File system event logs
+.fseventsd
+
+# Windows: Explorer thumbnail cache
+Thumbs.db
+
+# Windows: Media Center thumbnail cache
+ehthumbs.db
+
+# Windows: Folder customization metadata
+Desktop.ini
+
+# Windows: Recycle Bin folder
+$RECYCLE.BIN/
+
+# Linux: Temporary backup files (e.g. file.txt~)
+*~
+
+# Linux/NFS: Temporary files from open-but-deleted files
+.nfs*
+
+# Editors: Vim swap file
+*.swp
+
+# Editors: Vim backup swap file
+*.swo
+
+# General: Temporary files
+*.tmp
+
+# General: Backup files
+*.bak
+
+# General: Original files from merge conflicts or patches
+*.orig
+
+# Git: Dependencies installed by npm/yarn
+**/node_modules/
