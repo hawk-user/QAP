@@ -52,22 +52,40 @@ body:
         - Mock data available for sandbox mode
 
   - type: dropdown
-    id: approach
+    id: test_approach
     attributes:
-      label: "🧰 Technical Test Approach"
-      description: "Select the testing strategy used for this plan."
+      label: "🧰 Test Approach"
+      description: "Select the testing methodology or principle used to design test cases."
       options:
-        - Manual Testing
-        - Automated Testing (Unit + Integration)
-        - End-to-End (Cypress / Playwright)
-        - Load / Performance Testing
-        - Security / Penetration Testing
-        - Mixed Approach (Hybrid)
+        - Black-box Testing
+        - White-box Testing
+        - Grey-box Testing
+        - Model-based Testing
+        - Risk-based Testing
+        - Requirements-based Testing
+        - Exploratory Testing
+        - Ad hoc Testing
+        - Hybrid Approach
+
+  - type: dropdown
+    id: coverage_metric
+    attributes:
+      label: "📊 Coverage Metric (if applicable)"
+      description: "Select the type of code or decision coverage metric used in this plan (optional)."
+      options:
+        - Statement Coverage
+        - Branch Coverage
+        - Path Coverage
+        - Condition Coverage
+        - Decision Coverage
+        - Multiple Condition Coverage
+        - Hit-choice Coverage
+        - Not Applicable
 
   - type: input
     id: coverage
     attributes:
-      label: "📊 Estimated Test Coverage (%)"
+      label: "📈 Estimated Test Coverage (%)"
       description: "Provide an estimate of the test coverage for this feature or module."
       placeholder: "e.g. 85"
 
@@ -88,7 +106,8 @@ body:
         ---
         ## 🧾 Test Cases
         Fill in or modify the table below as needed.  
-        Each row represents one test case.
+        Each row represents one test case.  
+        To add a new test case, **copy the last row and update its values**.
 
   - type: textarea
     id: test_cases
@@ -98,9 +117,9 @@ body:
       placeholder: |
         | ID | Scenario | Steps | Expected Result | Status | Priority |
         |----|-----------|--------|----------------|---------|-----------|
-        | TC-01 | Successful login | Enter valid user/password | Redirect to dashboard | Pending | High |
-        | TC-02 | Invalid password | Enter wrong password | Show error message | Pending | Medium |
-        | TC-03 | Session timeout | Stay idle for 15 min | Redirect to login page | Pending | Low |
+        | TC-001 | Successful login | Enter valid credentials | Redirect to dashboard | Pending | High |
+        | TC-002 | Invalid password | Enter wrong password | Show error message | Pending | Medium |
+        | TC-003 | Session timeout | Stay idle for 15 min | Redirect to login | Pending | Low |
 
   - type: dropdown
     id: priority
@@ -121,13 +140,3 @@ body:
         - Load testing postponed until next sprint
         - Limited coverage for mobile browsers
         - Requires coordination with backend team
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: "🧾 Pre-Submission Checklist"
-      options:
-        - label: "Reviewed by QA"
-        - label: "Linked to corresponding feature issue or PR"
-        - label: "All critical test cases documented"
-        - label: "Acceptance criteria validated"
