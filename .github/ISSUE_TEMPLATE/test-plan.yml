@@ -1,0 +1,133 @@
+name: "🧪 Test Plan"
+description: "Create a complete and structured test plan for a feature, release, or technical change."
+title: "[Test Plan] <Feature or Area Name>"
+labels:
+  - "test plan"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🧪 Test Plan Template
+        Please fill out this template to document the objectives, scope, approach, and validation criteria of your testing effort.
+
+  - type: input
+    id: feature
+    attributes:
+      label: "🔍 Feature or Area Under Test"
+      description: "Which feature, module, or functionality does this test plan cover?"
+      placeholder: "e.g. Payment gateway integration"
+
+  - type: textarea
+    id: objectives
+    attributes:
+      label: "🎯 Test Objectives"
+      description: "Define what this test plan aims to validate or ensure."
+      placeholder: |
+        - Validate end-to-end payment flow
+        - Ensure proper error handling for declined transactions
+        - Confirm currency conversion is accurate
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: "📦 Scope and Coverage"
+      description: "List the areas included and excluded from this test plan."
+      placeholder: |
+        **In scope:**
+        - Payment API endpoints
+        - Front-end checkout flow
+
+        **Out of scope:**
+        - Third-party billing integrations
+        - Legacy mobile app checkout
+
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: "⚙️ Preconditions"
+      description: "Describe any setup, configurations, or dependencies required before testing begins."
+      placeholder: |
+        - Test environment configured with valid API keys
+        - Seeded test user accounts and sample transactions
+        - Mock data available for sandbox mode
+
+  - type: dropdown
+    id: approach
+    attributes:
+      label: "🧰 Technical Test Approach"
+      description: "Select the testing strategy used for this plan."
+      options:
+        - Manual Testing
+        - Automated Testing (Unit + Integration)
+        - End-to-End (Cypress / Playwright)
+        - Load / Performance Testing
+        - Security / Penetration Testing
+        - Mixed Approach (Hybrid)
+
+  - type: input
+    id: coverage
+    attributes:
+      label: "📊 Estimated Test Coverage (%)"
+      description: "Provide an estimate of the test coverage for this feature or module."
+      placeholder: "e.g. 85"
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "✅ Acceptance Criteria"
+      description: "Define clear, measurable criteria that determine when this test plan is considered successful."
+      placeholder: |
+        - All high-priority test cases pass
+        - No blocking or critical bugs remain open
+        - Regression test success rate above 95%
+        - Performance within acceptable limits
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## 🧾 Test Cases
+        Fill in or modify the table below as needed.  
+        Each row represents one test case.
+
+  - type: textarea
+    id: test_cases
+    attributes:
+      label: "📋 Test Cases Table"
+      description: "Add, remove, or modify rows as needed. You can update this table after issue creation."
+      placeholder: |
+        | ID | Scenario | Steps | Expected Result | Status | Priority |
+        |----|-----------|--------|----------------|---------|-----------|
+        | TC-01 | Successful login | Enter valid user/password | Redirect to dashboard | Pending | High |
+        | TC-02 | Invalid password | Enter wrong password | Show error message | Pending | Medium |
+        | TC-03 | Session timeout | Stay idle for 15 min | Redirect to login page | Pending | Low |
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "🚦 Overall Test Plan Priority"
+      description: "Define the importance or urgency of executing this test plan."
+      options:
+        - High
+        - Medium
+        - Low
+
+  - type: textarea
+    id: remarks
+    attributes:
+      label: "💬 Additional Remarks"
+      description: "Any comments, limitations, risks, or special notes about this test plan."
+      placeholder: |
+        - Load testing postponed until next sprint
+        - Limited coverage for mobile browsers
+        - Requires coordination with backend team
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "🧾 Pre-Submission Checklist"
+      options:
+        - label: "Reviewed by QA"
+        - label: "Linked to corresponding feature issue or PR"
+        - label: "All critical test cases documented"
+        - label: "Acceptance criteria validated"
