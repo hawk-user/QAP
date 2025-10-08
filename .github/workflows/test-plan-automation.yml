@@ -1,7 +1,7 @@
 name: "🧪 Test Plan Automation"
 
 on:
-  issues:
+  pull_request_target:
     types: [ opened, edited, labeled ]
 
 jobs:
@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 1
 
       - name: Use Node.js
         uses: actions/setup-node@v5

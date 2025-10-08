@@ -23,7 +23,6 @@ async function run() {
 
     const { labels, user } = issue;
     const isTestPlan = labels?.some(l => l.name.toLowerCase() === 'test plan') ?? false;
-
     if (!isTestPlan) {
       WavingGoodbye('Issue is not a Test Plan');
       return;
@@ -32,7 +31,6 @@ async function run() {
     const allowedUsers = ['hawk-user'];
     const author = user.login;
 
-    // Extract JSON from code block
     const jsonMatch = issue.body.match(/```json\s*([\s\S]*?)```/);
     if (!jsonMatch) {
       await octokit.rest.issues.createComment({
@@ -69,7 +67,6 @@ async function run() {
       return;
     }
 
-    // Validation des test cases
     const errors = [];
     const ids = new Set();
     testCases.forEach(tc => {
