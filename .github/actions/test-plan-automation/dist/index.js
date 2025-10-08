@@ -31848,12 +31848,9 @@ async function run() {
     if (!githubToken) throw new Error("Missing GITHUB_TOKEN");
 
     const octokit = github.getOctokit(githubToken);
-    const context = github.context;
-
-    const { payload, repo } = context;
-    const { issue } = payload;
-    const { owner } = repo;
-    const repoName = repo.repo;
+    const { context } = github;
+    const { issue } = context.payload;
+    const { owner, repo } = context.repo;
 
     if (!issue) {
       WavingGoodbye('No issue found in context.');
@@ -31861,8 +31858,8 @@ async function run() {
     }
 
     const { labels, user } = issue;
+    const isTestPlan = labels?.some(l => l.name.toLowerCase() === 'test plan') ?? false;
 
-    const isTestPlan = labels?.some(label => label.name.toLowerCase() === 'test plan') ?? false;
     if (!isTestPlan) {
       WavingGoodbye('Issue is not a Test Plan');
       return;
@@ -31871,17 +31868,18 @@ async function run() {
     const allowedUsers = ['hawk-user'];
     const author = user.login;
 
+    // Extract JSON from code block
     const jsonMatch = issue.body.match(/```json\s*([\s\S]*?)```/);
     if (!jsonMatch) {
-      await octokit.issues.createComment({
+      await octokit.rest.issues.createComment({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
         body: "❌ Test Plan invalid: missing JSON test cases."
       });
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
         labels: ['needs-fix']
       });
@@ -31892,56 +31890,43 @@ async function run() {
     try {
       testCases = JSON.parse(jsonMatch[1]);
     } catch (e) {
-      await octokit.issues.createComment({
+      await octokit.rest.issues.createComment({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
         body: `❌ Invalid JSON: ${e.message}`
       });
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
-        labels: ["needs-fix"]
+        labels: ['needs-fix']
       });
       return;
     }
 
+    // Validation des test cases
     const errors = [];
     const ids = new Set();
     testCases.forEach(tc => {
-      ["id", "scenario", "steps", "expected_result"].forEach(key => {
-        if (!tc.hasOwnProperty(key)) {
-          errors.push(`Missing key '${key}' in test case: ${JSON.stringify(tc)}`);
-        }
+      ['id', 'scenario', 'steps', 'expected_result'].forEach(key => {
+        if (!tc.hasOwnProperty(key)) errors.push(`Missing key '${key}' in test case: ${JSON.stringify(tc)}`);
       });
-      if (ids.has(tc.id)) {
-        errors.push(`Duplicate test case id: ${tc.id}`);
-      }
+      if (ids.has(tc.id)) errors.push(`Duplicate test case id: ${tc.id}`);
       ids.add(tc.id);
     });
 
     if (errors.length > 0) {
       const comment = "❌ Test Plan validation errors:\n" + errors.map(e => `- ${e}`).join("\n");
-      await octokit.issues.createComment({
-        owner,
-        repo: repoName,
-        issue_number: issue.number,
-        body: comment
-      });
-      await octokit.issues.addLabels({
-        owner,
-        repo: repoName,
-        issue_number: issue.number,
-        labels: ["needs-fix"]
-      });
+      await octokit.rest.issues.createComment({ owner, repo, issue_number: issue.number, body: comment });
+      await octokit.rest.issues.addLabels({ owner, repo, issue_number: issue.number, labels: ['needs-fix'] });
       return;
     }
 
     if (allowedUsers.includes(author)) {
-      const { data: defaultBranch } = await octokit.repos.getBranch({
+      const { data: defaultBranch } = await octokit.rest.repos.getBranch({
         owner,
-        repo: repoName,
+        repo,
         branch: context.repo.default_branch
       });
 
@@ -31950,12 +31935,12 @@ async function run() {
         const branchName = `test-plan/${slug}/${tc.id.toString().replace(/[^a-z0-9-]/gi, "-")}`;
 
         try {
-          await octokit.repos.getBranch({ owner, repo: repoName, branch: branchName });
+          await octokit.rest.repos.getBranch({ owner, repo, branch: branchName });
           core.info(`Branch ${branchName} already exists. Skipping.`);
         } catch {
-          await octokit.git.createRef({
+          await octokit.rest.git.createRef({
             owner,
-            repo: repoName,
+            repo,
             ref: `refs/heads/${branchName}`,
             sha: defaultBranch.commit.sha
           });
@@ -31963,31 +31948,31 @@ async function run() {
         }
       }
 
-      await octokit.issues.createComment({
+      await octokit.rest.issues.createComment({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
         body: "✅ Test Plan validated. Branches created for each test case."
       });
 
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
-        labels: ["validated"]
+        labels: ['validated']
       });
     } else {
-      await octokit.issues.createComment({
+      await octokit.rest.issues.createComment({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
         body: "✅ Test Plan validated. You are not authorized to create branches. A team member can create them for you."
       });
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner,
-        repo: repoName,
+        repo,
         issue_number: issue.number,
-        labels: ["validated"]
+        labels: ['validated']
       });
     }
 
