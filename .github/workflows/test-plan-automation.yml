@@ -1,8 +1,12 @@
 name: "🧪 Test Plan Automation"
 
 on:
-  pull_request_target:
+  issues:
     types: [ opened, edited, labeled ]
+
+permissions:
+  contents: write
+  issues: write
 
 jobs:
   validate_test_plan:
