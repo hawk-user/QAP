@@ -31920,13 +31920,17 @@ async function run() {
       return;
     }
 
-    if (allowedUsers.includes(author)) {
-      const { data: defaultBranch } = await octokit.rest.repos.getBranch({
-        owner,
-        repo,
-        branch: context.repo.default_branch
-      });
+    // ✅ Correction ici : récupération correcte du SHA de la branche par défaut
+    const { data: repoInfo } = await octokit.rest.repos.get({ owner, repo });
+    const defaultBranchName = repoInfo.default_branch;
 
+    const { data: branchData } = await octokit.rest.repos.getBranch({
+      owner,
+      repo,
+      branch: defaultBranchName
+    });
+
+    if (allowedUsers.includes(author)) {
       for (const tc of testCases) {
         const slug = issue.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
         const branchName = `test-plan/${slug}/${tc.id.toString().replace(/[^a-z0-9-]/gi, "-")}`;
@@ -31939,9 +31943,9 @@ async function run() {
             owner,
             repo,
             ref: `refs/heads/${branchName}`,
-            sha: defaultBranch.commit.sha
+            sha: branchData.commit.sha
           });
-          core.info(`Created branch ${branchName}`);
+          core.info(`✅ Created branch ${branchName}`);
         }
       }
 
