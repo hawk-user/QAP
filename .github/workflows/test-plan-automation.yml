@@ -17,6 +17,6 @@ jobs:
           node-version: 20
 
       - name: Run Test Plan Automation
-        uses: ./.github/actions/test-plan-automation/dist
+        run: node ./.github/actions/test-plan-automation/dist/index.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
