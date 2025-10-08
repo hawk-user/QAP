@@ -25,7 +25,7 @@ body:
       placeholder: |
         - Validate end-to-end payment flow
         - Ensure proper error handling for declined transactions
-        - Confirm currency conversion is accurate
+        - Confirm currency conversion accuracy
 
   - type: textarea
     id: scope
@@ -71,7 +71,7 @@ body:
     id: coverage_metric
     attributes:
       label: "📊 Coverage Metric (if applicable)"
-      description: "Select the type of code or decision coverage metric used in this plan (optional)."
+      description: "Select the type of coverage metric used in this plan."
       options:
         - Statement Coverage
         - Branch Coverage
@@ -104,22 +104,46 @@ body:
     attributes:
       value: |
         ---
-        ## 🧾 Test Cases
-        Fill in or modify the table below as needed.  
-        Each row represents one test case.  
-        To add a new test case, **copy the last row and update its values**.
+        ## 📋 Test Cases (Structured JSON)
+        Please list your test cases below using **valid JSON** format.
+        This format is safer and easier to parse automatically for automation or branch creation.
+        Each test case should include at least an **id**, **scenario**, and **expected_result**.
+
+        Example:
+        ```json
+        [
+          {
+            "id": "TC-001",
+            "scenario": "Successful login",
+            "steps": "Enter valid credentials and submit",
+            "expected_result": "User is redirected to dashboard",
+            "priority": "High"
+          },
+          {
+            "id": "TC-002",
+            "scenario": "Invalid password",
+            "steps": "Enter invalid password",
+            "expected_result": "Error message is displayed",
+            "priority": "Medium"
+          }
+        ]
+        ```
 
   - type: textarea
     id: test_cases
     attributes:
-      label: "📋 Test Cases Table"
-      description: "Add, remove, or modify rows as needed. You can update this table after issue creation."
+      label: "🧾 Test Cases (JSON Format)"
+      description: "Paste your list of test cases as a valid JSON array. Each test case must have a unique 'id'."
       placeholder: |
-        | ID | Scenario | Steps | Expected Result | Status | Priority |
-        |----|-----------|--------|----------------|---------|-----------|
-        | TC-001 | Successful login | Enter valid credentials | Redirect to dashboard | Pending | High |
-        | TC-002 | Invalid password | Enter wrong password | Show error message | Pending | Medium |
-        | TC-003 | Session timeout | Stay idle for 15 min | Redirect to login | Pending | Low |
+        [
+          {
+            "id": "TC-001",
+            "scenario": "Successful login",
+            "steps": "Enter valid credentials and submit",
+            "expected_result": "User is redirected to dashboard",
+            "priority": "High"
+          }
+        ]
 
   - type: dropdown
     id: priority
