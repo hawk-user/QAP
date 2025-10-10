@@ -7,4 +7,7 @@ export default {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
   testEnvironment: 'jsdom',
+  moduleNameMapper: {
+  '^@material/(.*)$': '<rootDir>/source/material/$1',
+}
 };

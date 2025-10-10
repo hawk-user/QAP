@@ -1,8 +1,5 @@
 import { render, screen } from '@testing-library/react';
-
-const WelcomeToQAP: React.FC = () => {
-	return  <>Bienvenue sur la page QAP</>;
-}
+import { WelcomeToQAP } from '@material/welcome.to.qap';
 
 describe('Welcome Component', () => {
   	it('renders the welcome message', () => {

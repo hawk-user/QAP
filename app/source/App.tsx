@@ -1,4 +1,4 @@
-import { WelcomeToQAP } from './welcome.to.qap';
+import { WelcomeToQAP } from '@material/welcome.to.qap';
 
 function App() {
 
