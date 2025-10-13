@@ -1,6 +1,7 @@
 packages:
-  - app
-  - .github/actions/*
+  - "webapp"
+  - "libs/*"
+  - "test/**"
 
 onlyBuiltDependencies:
   - esbuild
