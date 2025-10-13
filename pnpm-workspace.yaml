@@ -1,0 +1,7 @@
+packages:
+  - "webapp"
+  - "libs/*"
+  - "test/**"
+
+onlyBuiltDependencies:
+  - esbuild

@@ -1,0 +1,11 @@
+{
+    "name": "test-system-webapp",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "devDependencies": {
+        "cypress": "^15.4.0",
+        "@cypress/react": "^9.0.1",
+        "@types/node": "^24.6.0"
+    }
+}
