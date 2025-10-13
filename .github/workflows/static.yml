@@ -28,6 +28,9 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: "22"
+                
+            - name: Setup pnpm
+              run: npm install -g pnpm
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
