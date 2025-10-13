@@ -30,11 +30,11 @@ jobs:
                   node-version: "22"
 
             - name: Install dependencies
-              run: npm ci
+              run: pnpm install --frozen-lockfile
               working-directory: ./webapp
 
             - name: Build WebApp
-              run: npm run build
+              run: pnpm build
               working-directory: ./webapp
 
             - name: Upload Pages Artifact
