@@ -54,3 +54,6 @@ $RECYCLE.BIN/
 
 # Git: Dependencies installed by npm/yarn
 **/node_modules/
+
+# Build output
+**/.dist/
