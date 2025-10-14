@@ -52,10 +52,10 @@ jobs:
 
       - name: Install system test dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: system-tests
+        working-directory: test/system/webapp
 
       - name: Run Cypress system tests
-        working-directory: system-tests
+        working-directory: test/system/webapp
         env:
           CYPRESS_BASE_URL: ${{ inputs.base_url }}
         run: pnpm cypress run --browser chrome
