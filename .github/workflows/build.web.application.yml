@@ -1,0 +1,45 @@
+name: Build Web Application
+
+on:
+  workflow_run:
+    workflows: [ "System Testing On The Web Application" ]
+    types: [ completed ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: webapp
+
+      - name: Build WebApp
+        run: pnpm build
+        working-directory: webapp
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapp-dist
+          path: webapp/dist
