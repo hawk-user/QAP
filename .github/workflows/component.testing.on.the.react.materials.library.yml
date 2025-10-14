@@ -6,6 +6,7 @@ on:
     paths:
       - "test/component/libs/react-materials/**"
   pull_request:
+    branches: [ "**" ]
     paths:
       - "test/component/libs/react-materials/**"
   workflow_dispatch:
