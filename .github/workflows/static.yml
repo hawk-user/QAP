@@ -2,7 +2,7 @@ name: Build and Deploy WebApp to GitHub Pages
 
 on:
     push:
-        branches: ["main"]
+        branches: [ "main" ]
     workflow_dispatch:
 
 permissions:
@@ -35,16 +35,16 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
-              working-directory: ./webapp
+              working-directory: webapp
 
             - name: Build WebApp
               run: pnpm build
-              working-directory: ./webapp
+              working-directory: webapp
 
             - name: Upload Pages Artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: ./webapp/.dist
+                  path: webapp/dist
 
             - name: Deploy to GitHub Pages
               id: deployment

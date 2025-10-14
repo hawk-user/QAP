@@ -12,7 +12,7 @@ export default defineConfig({
   		alias: { '@libs': path.resolve(__dirname, '../libs') }
 	},
 	build: {
-    	outDir: path.resolve(__dirname, '.dist'),
+    	outDir: path.resolve(__dirname, 'dist'),
     	emptyOutDir: true,
     	rollupOptions: {
       		input: [ 
