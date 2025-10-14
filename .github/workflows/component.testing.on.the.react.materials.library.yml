@@ -4,10 +4,12 @@ on:
   push:
     branches: [ "**" ]
     paths:
+      - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"
   pull_request:
     branches: [ "**" ]
     paths:
+      - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"
   workflow_dispatch:
 
