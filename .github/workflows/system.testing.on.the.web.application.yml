@@ -2,12 +2,10 @@ name: System Testing On The Web Application
 
 on:
   push:
-    branches: [ "**" ]
     paths:
       - "webapp/**"
       - "test/system/webapp/**"
   pull_request:
-    branches: [ "**" ]
     paths:
       - "webapp/**"
       - "test/system/webapp/**"

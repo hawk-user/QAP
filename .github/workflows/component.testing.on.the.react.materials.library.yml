@@ -2,12 +2,10 @@ name: Component Testing On The React-materials Library
 
 on:
   push:
-    branches: [ "**" ]
     paths:
       - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"
   pull_request:
-    branches: [ "**" ]
     paths:
       - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"
