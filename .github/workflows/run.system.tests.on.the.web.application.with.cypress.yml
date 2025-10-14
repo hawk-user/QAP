@@ -1,4 +1,4 @@
-name: Run system tests On the Web Application With Cypress
+name: Run System Tests On The Web Application With Cypress
 
 on:
   workflow_call:
