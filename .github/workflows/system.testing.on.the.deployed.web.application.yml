@@ -1,0 +1,52 @@
+name: System Testing On The Deployed Web Application
+
+on:
+  workflow_run:
+    workflows: [ "Deploy WebApp to GitHub Pages" ]
+    types: [ completed ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  wait-and-run:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    outputs:
+      deploy_url: ${{ steps.compute.outputs.deploy_url }}
+
+    steps:
+
+      - name: Compute deployment URL
+        id: compute
+        run: |
+          DEPLOY_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY##*/}/"
+          echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+
+      - name: Wait for GitHub Pages to be live
+        run: |
+          DEPLOY_URL="${{ steps.compute.outputs.deploy_url }}"
+          echo "Checking deployment availability at $DEPLOY_URL"
+          for i in {1..30}; do
+            RESPONSE=$(curl -s "$DEPLOY_URL" || true)
+            if echo "$RESPONSE" | grep -q "<title>"; then
+              echo "🔎 Site content detected. Deployment is live."
+              echo "CYPRESS_BASE_URL=$DEPLOY_URL" >> $GITHUB_ENV
+              break
+            fi
+            echo "⏳ Waiting for GitHub Pages to be live ($i/30)..."
+            sleep 10
+          done
+          if [ -z "$CYPRESS_BASE_URL" ]; then
+            echo "👀 Deployment did not become available in time."
+            exit 1
+          fi
+
+  run-system-tests:
+    needs: [ wait-and-run ]
+    uses: ./.github/workflows/run.system.tests.on.the.web.application.with.cypress.yml
+    with:
+      base_url: ${{ needs.wait-and-run.outputs.deploy_url }}
