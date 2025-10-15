@@ -1,0 +1,21 @@
+name: System Testing On The Web Application
+
+on:
+  push:
+    paths:
+      - "webapp/**"
+      - "test/system/webapp/**"
+  pull_request:
+    paths:
+      - "webapp/**"
+      - "test/system/webapp/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-local:
+    uses: ./.github/workflows/run.system.tests.on.the.web.application.with.cypress.yml
+    with:
+      start_local: true

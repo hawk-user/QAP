@@ -1,0 +1,65 @@
+name: Run System Tests On The Web Application With Cypress
+
+on:
+  workflow_call:
+    inputs:
+      base_url:
+        required: false
+        type: string
+      start_local:
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  cypress-system-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        run: npm install -g pnpm
+
+      - name: Install webapp dependencies
+        if: ${{ inputs.start_local }}
+        run: pnpm install --frozen-lockfile
+        working-directory: webapp
+
+      - name: Start local server (if required)
+        if: ${{ inputs.start_local }}
+        working-directory: webapp
+        run: |
+          echo "Starting local preview server..."
+          pnpm build
+          nohup pnpm preview --port 5173 > ../server.log 2>&1 &
+          for i in {1..20}; do
+            if curl -s http://localhost:5173 | grep -q "<title>"; then
+              echo "📡 Local app is live on port 5173."
+              break
+            fi
+            echo "⏳ Waiting for local server to be ready ($i/20)..."
+            sleep 5
+          done
+
+      - name: Install system test dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: test/system/webapp
+
+      - name: Ensure Cypress binary is installed
+        working-directory: test/system/webapp
+        run: pnpm cypress install
+
+      - name: Run Cypress system tests
+        working-directory: test/system/webapp
+        env:
+          CYPRESS_BASE_URL: ${{ inputs.base_url }}
+        run: pnpm cypress run --browser chrome

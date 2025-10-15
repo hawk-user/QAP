@@ -1,0 +1,39 @@
+name: Component Testing On The React-materials Library
+
+on:
+  push:
+    paths:
+      - "libs/react-materials/**"
+      - "test/component/libs/react-materials/**"
+  pull_request:
+    paths:
+      - "libs/react-materials/**"
+      - "test/component/libs/react-materials/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  component-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: test/component/libs/react-materials
+
+      - name: Run Jest tests
+        working-directory: test/component/libs/react-materials
+        run: pnpm test --runInBand
