@@ -11,11 +11,9 @@ permissions:
 
 jobs:
   build:
-    
     if: >
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.head_branch == 'main'
-
     runs-on: ubuntu-latest
 
     steps:
@@ -43,3 +41,9 @@ jobs:
         with:
           name: webapp-dist
           path: webapp/dist
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.web.application.to.github.pages.yml
+    with:
+      artifact_name: webapp-dist

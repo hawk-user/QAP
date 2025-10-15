@@ -1,9 +1,12 @@
 name: Deploy WebApp to GitHub Pages
 
 on:
-  workflow_run:
-    workflows: [ "Build Web Application" ]
-    types: [ completed ]
+  workflow_call:
+    inputs:
+      artifact_name:
+        required: true
+        type: string
+        default: webapp-dist
 
 permissions:
   contents: read
@@ -16,17 +19,16 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
 
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: webapp-dist
+          name: ${{ inputs.artifact_name }}
           path: webapp/dist
 
       - name: Upload Pages Artifact
