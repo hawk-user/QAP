@@ -12,7 +12,7 @@ permissions:
 jobs:
 
   wait-and-run:
-    
+
     if: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     runs-on: ubuntu-latest
@@ -30,19 +30,24 @@ jobs:
 
       - name: Wait for GitHub Pages to be live
         run: |
-          DEPLOY_URL="${{ steps.compute.outputs.deploy_url }}"
+          DEPLOY_URL="https://hawk-user.github.io/QAP/"
           echo "Checking deployment availability at $DEPLOY_URL"
+
+          SITE_LIVE=false
           for i in {1..30}; do
             RESPONSE=$(curl -s "$DEPLOY_URL" || true)
             if echo "$RESPONSE" | grep -q "<title>"; then
               echo "🔎 Site content detected. Deployment is live."
-              echo "CYPRESS_BASE_URL=$DEPLOY_URL" >> $GITHUB_ENV
+              SITE_LIVE=true
               break
             fi
             echo "⏳ Waiting for GitHub Pages to be live ($i/30)..."
             sleep 10
           done
-          if [ -z "$CYPRESS_BASE_URL" ]; then
+
+          if [ "$SITE_LIVE" = true ]; then
+            echo "CYPRESS_BASE_URL=$DEPLOY_URL" >> $GITHUB_ENV
+          else
             echo "👀 Deployment did not become available in time."
             exit 1
           fi
