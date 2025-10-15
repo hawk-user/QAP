@@ -22,6 +22,12 @@ The pipeline ensures reliable testing, building, and deployment through reusable
 
 ---
 
-<small>
+<p>
     QAP is <a href="LICENSE">MIT Licensed</a>.
-</small>
+</p>
+
+<a href="https://sonarcloud.io/summary/new_code?id=hawk-user_QAP">
+    <img
+        alt="Scanned on SonarQube Cloud badge"
+        src="https://sonarcloud.io/images/project_badges/sonarcloud-highlight.svg"/>
+</a>
