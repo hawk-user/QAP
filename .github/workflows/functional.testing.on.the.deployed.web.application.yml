@@ -1,4 +1,4 @@
-name: System Testing On The Deployed Web Application
+name: Functional Testing On The Deployed Web Application
 
 on:
   workflow_run:
@@ -54,6 +54,6 @@ jobs:
 
   run-system-tests:
     needs: [ wait-and-run ]
-    uses: ./.github/workflows/run.system.tests.on.the.web.application.with.cypress.yml
+    uses: ./.github/workflows/run.functional.tests.on.the.web.application.with.cypress.yml
     with:
       base_url: ${{ needs.wait-and-run.outputs.deploy_url }}

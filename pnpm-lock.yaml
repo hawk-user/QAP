@@ -76,7 +76,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.13.5)(@types/node@24.7.2)(typescript@5.9.3)
 
-  test/system/webapp:
+  test/system/functional/webapp:
     devDependencies:
       '@cypress/react':
         specifier: ^9.0.1

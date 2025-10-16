@@ -1,4 +1,4 @@
-name: Run System Tests On The Web Application With Cypress
+name: Run Functional Tests On The Web Application With Cypress
 
 on:
   workflow_call:
@@ -52,14 +52,14 @@ jobs:
 
       - name: Install system test dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: test/system/webapp
+        working-directory: test/system/functional/webapp
 
       - name: Ensure Cypress binary is installed
-        working-directory: test/system/webapp
+        working-directory: test/system/functional/webapp
         run: pnpm cypress install
 
       - name: Run Cypress system tests
-        working-directory: test/system/webapp
+        working-directory: test/system/functional/webapp
         env:
           CYPRESS_BASE_URL: ${{ inputs.base_url }}
         run: pnpm cypress run --browser chrome
