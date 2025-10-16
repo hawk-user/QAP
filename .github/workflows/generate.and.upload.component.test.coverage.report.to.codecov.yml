@@ -1,0 +1,47 @@
+name: Generate And Upload Component Test Coverage Report to Codecov
+
+on:
+  push:
+    paths:
+      - "libs/react-materials/**"
+      - "test/component/libs/react-materials/**"
+  pull_request:
+    paths:
+      - "libs/react-materials/**"
+      - "test/component/libs/react-materials/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  component-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: test/component/libs/react-materials
+
+      - name: Output a Coverage report
+        working-directory: test/component/libs/react-materials
+        run: pnpm test:coverage --runInBand
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: test/component/libs/react-materials/coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true
