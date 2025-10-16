@@ -36,4 +36,4 @@ jobs:
 
       - name: Run Jest tests
         working-directory: test/component/libs/react-materials
-        run: pnpm test --runInBand
+        run: pnpm test:component --runInBand
