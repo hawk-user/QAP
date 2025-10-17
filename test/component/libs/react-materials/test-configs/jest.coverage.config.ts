@@ -1,4 +1,4 @@
-import { baseConfig } from './jest.base.config';
+const { baseConfig } = require("./jest.base.config");
 
 export default {
 
