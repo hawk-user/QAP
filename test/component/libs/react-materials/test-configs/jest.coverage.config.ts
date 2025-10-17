@@ -1,6 +1,4 @@
-import type { Config } from 'jest';
 import { baseConfig } from './jest.base.config';
-
 
 export default {
 
