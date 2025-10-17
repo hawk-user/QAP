@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "test:component": "jest --config ./jest.component.config.ts",
-        "test:coverage": "jest --config test-configs/jest.coverage.config.ts",
+        "test:coverage": "jest --config ./jest.coverage.config.ts",
         "test": "jest"
     },
     "devDependencies": {
