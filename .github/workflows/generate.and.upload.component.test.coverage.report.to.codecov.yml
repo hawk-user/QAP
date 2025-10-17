@@ -33,7 +33,7 @@ jobs:
 
       - name: Output a Coverage report
         working-directory: test/component/libs/react-materials
-        run: pnpm test:coverage --runInBand
+        run: pnpm test:coverage --runInBand --coverage
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
