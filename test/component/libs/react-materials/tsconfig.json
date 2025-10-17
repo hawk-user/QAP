@@ -1,11 +1,13 @@
 {
     "extends": "../../../../tsconfig.base.json",
     "compilerOptions": {
+        "strict": true,
         "jsx": "react-jsx",
         "types": [
             "jest",
             "@testing-library/jest-dom",
             "node"
         ]
-    }
+    },
+    "include": ["test-configs/**/*.ts", "setupTests.ts", "**/*.ts", "**/*.tsx"]
 }
