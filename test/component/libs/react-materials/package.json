@@ -2,7 +2,6 @@
     "name": "test-libs-component-react-component",
     "private": true,
     "version": "0.0.0",
-    "type": "module",
     "scripts": {
         "test:component": "jest --config test-configs/jest.component.config.ts",
         "test:coverage": "jest --config test-configs/jest.coverage.config.ts"
