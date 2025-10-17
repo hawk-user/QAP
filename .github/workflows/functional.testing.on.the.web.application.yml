@@ -1,12 +1,6 @@
 name: Functional Testing On The Web Application
 
 on:
-  push:
-    paths:
-      - "webapp/**"
-      - "test/system/functional/webapp/**"
-      - "libs/react-materials/**"
-      - "test/component/libs/react-materials/**"
   pull_request:
     paths:
       - "webapp/**"
