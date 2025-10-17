@@ -1,27 +1,26 @@
-export default {
+import { Config } from 'jest';
 
-        roots: ['<rootDir>'],
-        testMatch: ['**/*.test.{ts,tsx}'],
-        testEnvironment: 'jsdom',
-        transform: {
-            '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
-        },
-        setupFilesAfterEnv: [
-            '<rootDir>/setupTests.ts',
-        ],
-        moduleNameMapper: {
-            '^@libs/react-material$': '<rootDir>/../../../../libs/react-material/source',
-        },
+const config: Config = {
+      rootDir: '../../../../libs/react-material',
+      roots: [ '<rootDir>', '<rootDir>/../../test/component/libs/react-materials/' ],
+      testMatch: ['**/*.test.{ts,tsx}'],
+      testEnvironment: 'jsdom',
+      transform: {
+        '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+      },
+      setupFilesAfterEnv: [
+        '<rootDir>/../../test/component/libs/react-materials/setupTests.ts',
+      ],
+      moduleNameMapper: {
+        '^@libs/react-material(.*)$': '<rootDir>/source$1'
+      },
+      collectCoverageFrom: [
+        '!**/*.d.ts',
+        '!**/node_modules/**',
+      ],
+      coverageDirectory: '<rootDir>/../../test/component/libs/react-materials/coverage',
+      coverageReporters: ['text', 'lcov'],
 
-        collectCoverage: true,
-        collectCoverageFrom: [
-            '<rootDir>/../../../../libs/react-material/source/**/*.{ts,tsx}',
-            '!**/*.d.ts',
-            '!**/index.ts',
-            '!**/node_modules/**',
-        ],
-        forceCoverageMatch: [ '**/libs/react-material/source/**/*.ts?(x)' ],
-        coverageDirectory: '<rootDir>/coverage',
-        coverageReporters: ['text', 'lcov']
+};
 
-}
+export default config;
