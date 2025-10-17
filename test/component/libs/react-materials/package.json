@@ -4,7 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "test:component": "jest --config jest.component.config.ts",
+        "test:component": "jest --config ./jest.component.config.ts",
         "test:coverage": "jest --config test-configs/jest.coverage.config.ts",
         "test": "jest"
     },
