@@ -1,7 +1,7 @@
 name: Generate And Upload Component Test Coverage Report to Codecov
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
     paths:
       - "libs/react-materials/**"

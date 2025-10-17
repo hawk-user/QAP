@@ -1,7 +1,7 @@
 name: Component Testing On The React-materials Library
 
 on:
-  pull_request:
+  push:
     paths:
       - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"

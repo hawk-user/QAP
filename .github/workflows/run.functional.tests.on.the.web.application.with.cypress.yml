@@ -63,3 +63,8 @@ jobs:
         env:
           CYPRESS_BASE_URL: ${{ inputs.base_url }}
         run: pnpm cypress run --browser chrome
+
+  trigger-build:
+    if: ${{ success() && github.ref == 'refs/heads/main' && inputs.start_local }}
+    needs: cypress-system-tests
+    uses: ./.github/workflows/build.web.application.yml
