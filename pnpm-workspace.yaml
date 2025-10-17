@@ -1,7 +1,8 @@
 packages:
-  - "webapp"
-  - "libs/*"
-  - "test/**"
+  - webapp
+  - libs/*
+  - test/**
 
 onlyBuiltDependencies:
+  - cypress
   - esbuild

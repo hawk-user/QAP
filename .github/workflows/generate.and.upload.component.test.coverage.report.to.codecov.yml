@@ -1,7 +1,8 @@
-name: Component Testing On The React-materials Library
+name: Generate And Upload Component Test Coverage Report to Codecov
 
 on:
   pull_request:
+    branches: [ main ]
     paths:
       - "libs/react-materials/**"
       - "test/component/libs/react-materials/**"
@@ -30,6 +31,14 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: test/component/libs/react-materials
 
-      - name: Run Jest tests
+      - name: Output a Coverage report
         working-directory: test/component/libs/react-materials
-        run: pnpm test:component --runInBand
+        run: pnpm test:coverage --runInBand --coverage
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: test/component/libs/react-materials/coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true
