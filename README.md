@@ -13,6 +13,7 @@ Quick overview of the health of the project's code, displaying maintainability, 
 ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hawk-user_QAP&metric=code_smells)
 ![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hawk-user_QAP&metric=bugs)
 ![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=hawk-user_QAP&metric=duplicated_lines_density)
+[![codecov](https://codecov.io/gh/hawk-user/QAP/graph/badge.svg?token=3V63X2XTS2)](https://codecov.io/gh/hawk-user/QAP)
 
 
 ## CI/CD Strategy
