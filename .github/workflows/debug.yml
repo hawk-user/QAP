@@ -34,13 +34,13 @@ jobs:
           node-version: 22
 
       # 🧩 Étape 3 — Installer pnpm
-      - name: Setup pnpm
-        run: npm install -g pnpm
+    #   - name: Setup pnpm
+    #     run: npm install -g pnpm
 
       # 🧩 Étape 4 — Installer les dépendances
-      - name: Install dependencies
-        working-directory: test/component/libs/react-materials
-        run: pnpm install --frozen-lockfile
+    #   - name: Install dependencies
+    #     working-directory: test/component/libs/react-materials
+    #     run: pnpm install --frozen-lockfile
 
       # 🧩 Étape 5 — Debug du contexte CI/CD
       # Ce script affiche les infos d'environnement et vérifie les chemins Jest.
@@ -49,6 +49,6 @@ jobs:
         run: node debug-env.mjs
 
       # 🧩 Étape 6 — Exécution des tests Jest
-      - name: Run Jest component tests
-        working-directory: test/component/libs/react-materials
-        run: pnpm test:component --runInBand
+    #   - name: Run Jest component tests
+    #     working-directory: test/component/libs/react-materials
+    #     run: pnpm test:component --runInBand

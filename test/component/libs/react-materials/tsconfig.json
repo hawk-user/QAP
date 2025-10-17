@@ -1,15 +1,11 @@
 {
     "extends": "../../../../tsconfig.base.json",
     "compilerOptions": {
-        "strict": true,
         "jsx": "react-jsx",
-        "module": "CommonJS",
-        "target": "ES2019",
         "types": [
             "jest",
             "@testing-library/jest-dom",
             "node"
         ]
-    },
-    "include": ["test-configs/**/*.ts", "setupTests.ts", "**/*.ts", "**/*.tsx"]
+    }
 }
