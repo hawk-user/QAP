@@ -1,0 +1,23 @@
+name: "Setup And Run Cypress"
+description: "Install Node.js and the necessary dependencies."
+inputs:
+  url:
+    description: "The URL on which the tests are performed."
+    required: true
+  workspace:
+    description: "The location of the workspace."
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Move to the working directory
+      shell: bash
+      run: cd "${{ inputs.workspace }}"
+    - name: Ensure Cypress binary is installed
+      shell: bash
+      run: pnpm cypress install
+    - name: Run Functional tests
+      shell: bash
+      env:
+        CYPRESS_BASE_URL: ${{ inputs.url }}
+      run: pnpm cypress run --browser chrome
