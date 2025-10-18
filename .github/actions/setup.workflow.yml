@@ -1,0 +1,20 @@
+name: "Setup Workflow"
+description: "Install Node.js and the necessary dependencies."
+inputs:
+  node-version:
+    description: "Node.js version to use. The default version is version 22."
+    required: false
+    default: "22"
+runs:
+  using: "composite"
+  steps:
+    - name: Chekout repository
+      uses: actions/checkout@v5
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+    - name: Install Performant Node Package Manager (pnpm)
+      run: npm install -g pnpm
+      shell: bash
