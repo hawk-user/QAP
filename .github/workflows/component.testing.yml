@@ -18,7 +18,7 @@ jobs:
       (github.event_name == 'pull_request' && github.base_ref != 'main')
     steps:
       - uses: './.github/actions/setup.workflow'
-      - uses: './.github/actions/setup.worspace'
+      - uses: './.github/actions/setup.workspace'
         with:
           workspace: test/component/libs/react-materials
       - name: Run component tests
