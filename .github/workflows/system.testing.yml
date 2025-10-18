@@ -1,0 +1,38 @@
+name: System Testing
+on:
+  push:
+    paths:
+      - "webapp/**"
+      - "test/system/functional/webapp/**"
+      - "libs/react-materials/**"
+  pull_request:
+    paths:
+      - "webapp/**"
+      - "test/system/functional/webapp/**"
+      - "libs/react-materials/**"
+env:
+  PORT: 5080
+  URL: "http://localhost:5080"
+permissions:
+  contents: read
+jobs:
+  component-tests:
+    runs-on: ubuntu-latest
+    if: >
+      (github.event_name == 'push' && github.ref == 'refs/head/main') ||
+      (github.event_name == 'pull_request' && github.base_ref != 'main')
+    steps:
+      - uses: './.github/actions/setup.workflow'
+      - uses: './.github/actions/setup.workspace'
+        with:
+          workspace: webapp
+      - uses: './.github/actions/setup.workspace'
+        with:
+          workspace: test/system/functional/webapp
+      - name: Start Local Preview Server
+        working-directory: webapp
+        run: "./.github/scripts/starting.local.preview.sh --port=$URL"
+      - uses: './.github/actions/setup.and.run.cypress'
+        with:
+          url: ${{ env.URL }}
+          workspace: 'test/system/functional/webapp'
