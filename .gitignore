@@ -60,3 +60,6 @@ $RECYCLE.BIN/
 
 # Coverage reports
 **/coverage/
+
+# Backup files for VS Code
+**/.vscode/
