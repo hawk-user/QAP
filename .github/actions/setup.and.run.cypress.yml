@@ -1,5 +1,5 @@
 name: "Setup And Run Cypress"
-description: "Install Node.js and the necessary dependencies."
+description: "Configure and install Cypress correctly, then launch it."
 inputs:
   url:
     description: "The URL on which the tests are performed."
