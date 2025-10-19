@@ -1,0 +1,25 @@
+{
+    // Enable automatic loading of knows schemas (Github, Azure, etc.)
+    "yaml.schemaStore.enable": true,
+
+    "yaml.schemas": {
+        // Apply Github Workflow shema to all YAML files in .github/workflows
+        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml",
+
+        // Apply Github Workflow shema to local action definitions
+        "./.vscode/schemas/actions/publish-codecov-report-schema.json": ".github/actions/publish-codecov-report/action.yml",
+        "./.vscode/schemas/actions/setup-and-run-cypress-schema.json": ".github/actions/setup-and-run-cypress/action.yml",
+        "./.vscode/schemas/actions/setup-workflow-schema.json": ".github/actions/setup-workflow/action.yml",
+        "./.vscode/schemas/actions/setup-workspace-schema.json": ".github/actions/setup-workspace/action.yml"
+    },
+
+    // General YAML editor preferences
+    "yaml.validate": true,
+    "yaml.hover": true,
+    "yaml.completion": true,
+    "yaml.format.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.format.bracketSpacing": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+}
