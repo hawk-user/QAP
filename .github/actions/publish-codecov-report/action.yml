@@ -1,5 +1,5 @@
 name: "Publish Codecov Report"
-description: ""
+description: "Uploads coverage reports to Codecov"
 inputs:
   workspace:
     description: "The location of the workspace."
