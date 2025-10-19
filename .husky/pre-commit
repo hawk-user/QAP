@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+pnpm actionlint
+
+echo "🫣 Everything is going wonderfully!"
