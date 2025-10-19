@@ -18,21 +18,21 @@ Make sure you have the following intalled:
 If **pnpm** is not installed yet:
 
 ```bash
-    npm install -g pnpm
+npm install -g pnpm
 ```
 
 ### 2 - Install dependencies
 Install project dependencies using **pnpm**:
 
 ```bash
-    pnpm install
+pnpm install
 ```
 
 ### 3 - Enable Git hooks
 This project uses <a hreh="https://typicode.github.io/husky/">Husky</a> for Git hooks.</br>After installing dependencies, you need to enable Husky manually:
 
 ```bash
-    pnpm husky install
+pnpm exec husky init
 ```
 
 **Note:** This commands activates the pre-configured hooks.
@@ -41,8 +41,8 @@ This project uses <a hreh="https://typicode.github.io/husky/">Husky</a> for Git 
 Contains several shell scripts that need excutable permissions to work correctly:
 
 ```
-    .husky/                     -> Git hooks (run locally)
-    .github/scripts/            -> CI helper scripts used by Github Actions
+.husky/                     -> Git hooks (run locally)
+.github/scripts/            -> CI helper scripts used by Github Actions
 ```
 
 **Note:** These files are already marked as **executable** in the Git repository (via chmod+x), so if you clone the repository using Git on macOS, Linux, WSL, their executable flag will **normally be preserved automatically**.
@@ -52,14 +52,14 @@ However, in some environments(especially on **Window** or when downloading the p
 To fix this, make sure all relevant scripts are executable:
 
 ```bash
-    chmod +x .husky/* .github/scripts/*.sh
+chmod +x .husky/* .github/scripts/*.sh
 ```
 
 ### 5 - Install actionlint
 Actionlint is used in this projects to make the CI workflows more robust. It helps catch syntax errors or misconfiguration in Github Actions workflows before they break automated checks.
 
 ```bash
-    go install github.com/rhysd/actionlint/cmd/actionlint@latest
+go install github.com/rhysd/actionlint/cmd/actionlint@latest
 ```
 
 ## Code Quality Overview
