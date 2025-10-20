@@ -1,9 +1,6 @@
 name: Component Testing
 on:
-  push:
-    paths:
-      - 'libs/react-materials/**'
-      - 'test/component/libs/react-materials/**'
+  workflow_call:
   pull_request:
     paths:
       - "libs/react-materials/**"
