@@ -41,6 +41,7 @@ pnpm exec husky init
 Contains several shell scripts that need excutable permissions to work correctly:
 
 ```
+.husky/                     -> Git hooks (run locally)
 .github/scripts/            -> CI helper scripts used by Github Actions
 ```
 
