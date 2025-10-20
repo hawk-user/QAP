@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+npx --no -- commitlint --config .github/.commitlintrc.yml --edit "$1"
+
+echo "[commit-msg]: ✨ Magic is everywhere!"
