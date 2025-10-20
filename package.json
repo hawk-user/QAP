@@ -6,6 +6,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/format": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "eslint": "^9.36.0",
@@ -13,8 +14,5 @@
     "husky": "^9.1.7",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0"
-  },
-  "scripts": {
-    "prepare": "husky"
   }
 }
