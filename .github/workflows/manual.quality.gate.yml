@@ -1,0 +1,16 @@
+name: "Manual Quality Gate"
+on:
+  workflow_call:
+jobs:
+  manual-quality-gate:
+    runs-on: ubuntu-latest
+    environment:
+      name: manual-approval
+      url: https://github.com/hawk-user/QAP/actions
+    timeout-minutes: 2880
+    continue-on-error: true
+    steps:
+      - name: Pause for manual approval
+        run: |
+          echo "🕐 The Quality Gate is awaiting your review and GO/NO-GO decision."
+          echo "You have a 48-hour reflection window to validate, after which the workflow will continue automatically."
