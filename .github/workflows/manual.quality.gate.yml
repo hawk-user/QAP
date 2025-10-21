@@ -7,10 +7,10 @@ jobs:
     environment:
       name: manual-approval
       url: https://github.com/hawk-user/QAP/actions
-    timeout-minutes: 2880
+    timeout-minutes: 300
     continue-on-error: true
     steps:
       - name: Pause for manual approval
         run: |
           echo "🕐 The Quality Gate is awaiting your review and GO/NO-GO decision."
-          echo "You have a 48-hour reflection window to validate, after which the workflow will continue automatically."
+          echo "You have a 5-hour reflection window to validate, after which the workflow will continue automatically."
