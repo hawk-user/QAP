@@ -63,7 +63,7 @@ if ! pnpm tsc && pnpm exec vite build --outDir dist; then
 fi
 
 echo "🚀 Launching preview server..."
-nohup pnpm preview --port "${PORT}" > ../server.log 2>&1 &
+nohup pnpm exec vite preview --port "${PORT}" > ../server.log 2>&1 &
 
 MAX_TRIES=20
 for i in $(seq 1 $MAX_TRIES); do
