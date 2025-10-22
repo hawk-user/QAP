@@ -68,7 +68,7 @@ nohup pnpm exec vite preview --port "${PORT}" --host > ../server.log 2>&1 &
 MAX_TRIES=20
 for i in $(seq 1 $MAX_TRIES); do
 
-    if curl -s --max-time 2 "http://localhost:${PORT}" | grep -q "<html>"; then
+    if curl -s --max-time 2 "http://localhost:${PORT}" | grep -qi "<title>"; then
         echo "📡 Local app is live on port ${PORT}."
         exit 0
     fi
