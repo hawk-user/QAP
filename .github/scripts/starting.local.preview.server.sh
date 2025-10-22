@@ -63,7 +63,7 @@ if ! pnpm tsc && pnpm exec vite build --outDir dist; then
 fi
 
 echo "🚀 Launching preview server..."
-nohup pnpm exec vite preview --port 0.0.0.0 "${PORT}" --host > ../server.log 2>&1 &
+nohup pnpm exec vite preview --port "${PORT}" --host 0.0.0.0 > server.log 2>&1 &
 
 sleep 2
 echo "🧩 Checking if Vite preview process is running..."
