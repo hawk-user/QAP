@@ -4,7 +4,7 @@
   "type": "object",
   "required": ["name", "description", "inputs", "runs"],
   "properties": {
-    "name": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "const": "Setup And Run Cypress" },
     "description": { "type": "string", "minLength": 1 },
     "inputs": {
       "type": "object",
@@ -14,7 +14,8 @@
         "required": ["description", "required"],
         "properties": {
           "description": { "type": "string", "minLength": 1 },
-          "required": { "type": "boolean" }
+          "required": { "type": "boolean" },
+          "default": { "type": ["string", "number", "boolean"] }
         },
         "additionalProperties": false
       }
@@ -35,17 +36,12 @@
               "run": { "type": "string" },
               "uses": { "type": "string" },
               "with": { "type": "object", "additionalProperties": true },
-              "env": { "type": "object", "additionalProperties": { "type": "string" } }
+              "env": { "type": "object", "additionalProperties": { "type": "string" } },
+              "working-directory": { "type": "string" }
             },
             "anyOf": [
-              { "required": ["run", "name"] },
-              { "required": ["uses", "name"] }
-            ],
-            "allOf": [
-              {
-                "if": { "required": ["run"] },
-                "then": { "required": ["shell"] }
-              }
+              { "required": ["name", "run"] },
+              { "required": ["name", "uses"] }
             ],
             "additionalProperties": false
           }
