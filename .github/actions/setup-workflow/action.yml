@@ -12,7 +12,11 @@ runs:
       uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
-        cache: pnpm
+
     - name: Install Performant Node Package Manager (pnpm)
       run: npm install -g pnpm
+      shell: bash
+    - name: Add npm global bin to PATH
+      run: |
+        echo "$(npm bin -g)" >> $GITHUB_PATH
       shell: bash
