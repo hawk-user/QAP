@@ -5,6 +5,10 @@ inputs:
     description: "Node.js version to use. The default version is version 22."
     required: false
     default: "22"
+  pnpm-version:
+    description: "Version of pnpm to install The default version is version 10."
+    required: false
+    default: "10"
 runs:
   using: "composite"
   steps:
@@ -15,3 +19,5 @@ runs:
 
     - name: Install Performant Node Package Manager (pnpm)
       uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
