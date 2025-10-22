@@ -70,6 +70,7 @@ echo "🧩 Checking if Vite preview process is running..."
 ps aux | grep vite
 echo "🧩 Checking listening ports:"
 lsof -i :${PORT} || echo "⚠️ No process found on port ${PORT}"
+ls
 
 MAX_TRIES=20
 for i in $(seq 1 $MAX_TRIES); do
