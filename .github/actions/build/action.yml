@@ -29,4 +29,5 @@ runs:
       with:
         name: "${{ inputs.workspace }}-${{ inputs.output-dir }}"
         path: "${{ inputs.workspace }}/${{ inputs.output-dir }}"
+        archive-format: zip
         retention-days: 1
