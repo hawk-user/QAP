@@ -40,8 +40,8 @@ if (( PORT < 1 || PORT > 65535 )); then
     exit 1
 fi
 
-if [[ -z "$WEBAPP_PATH" ]]; then
-    WEBAPP_PATH="$(pwd)"
+if [[ -z "$PATH" ]]; then
+    PATH="$(pwd)"
     echo "ℹ️ No path provided. Using current directory: $PATH"
 fi
 
