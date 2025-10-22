@@ -37,7 +37,9 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     permissions:
-        contents: 'write'
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - uses: './.github/actions/setup-workflow'
         with:
