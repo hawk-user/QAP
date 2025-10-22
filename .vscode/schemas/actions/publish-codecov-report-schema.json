@@ -41,6 +41,12 @@
               { "required": ["run", "name"] },
               { "required": ["uses", "name"] }
             ],
+            "allOf": [
+              {
+                "if": { "required": ["run"] },
+                "then": { "required": ["shell"] }
+              }
+            ],
             "additionalProperties": false
           }
         }
