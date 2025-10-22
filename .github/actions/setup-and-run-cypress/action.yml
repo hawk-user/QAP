@@ -16,10 +16,9 @@ runs:
         cd "$WORKSPACE" || { echo "Workspace not found"; exit 1; }
       env:
         WORKSPACE: ${{ inputs.workspace }}
-        
-    - name: Ensure Cypress binary is installed
-      shell: bash
-      run: pnpm exec cypress install
+
+    - name: Install all dependencies
+      run: pnpm install --frozen-lockfile
 
     - name: Run Functional tests
       shell: bash
