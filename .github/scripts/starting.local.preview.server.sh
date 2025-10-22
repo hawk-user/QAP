@@ -63,12 +63,18 @@ if ! pnpm tsc && pnpm exec vite build --outDir dist; then
 fi
 
 echo "🚀 Launching preview server..."
-nohup pnpm exec vite preview --port "${PORT}" --host > ../server.log 2>&1 &
+nohup pnpm --dir webapp preview --port "${PORT}" --host 0.0.0.0 > webapp/server.log 2>&1 &
+
+sleep 2
+echo "🧩 Checking if Vite preview process is running..."
+ps aux | grep vite
+echo "🧩 Checking listening ports:"
+lsof -i :${PORT} || echo "⚠️ No process found on port ${PORT}"
 
 MAX_TRIES=20
 for i in $(seq 1 $MAX_TRIES); do
 
-    if curl -s --max-time 2 "http://localhost:${PORT}" | grep -qi "<title>"; then
+    if curl -s --max-time 2 "http://127.0.0.1:${PORT}" | grep -qi "<title>"; then
         echo "📡 Local app is live on port ${PORT}."
         exit 0
     fi
