@@ -62,6 +62,9 @@ if ! pnpm tsc && pnpm exec vite build --outDir dist; then
     exit 1
 fi
 
+echo "🪵 Dumping server.log for debug:"
+cat server.log || echo "⚠️ No log content found."
+
 echo "🚀 Launching preview server..."
 nohup pnpm exec vite preview --port "${PORT}" --host 0.0.0.0 > server.log 2>&1 &
 
