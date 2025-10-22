@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PATH=""
+WSDIR=""
 PORT=""
 
 for arg in "$@"; do
@@ -15,7 +15,7 @@ for arg in "$@"; do
             PORT="${arg#*=}"
             ;;
         --path=*)
-            PATH="${arg#*=}"
+            WSDIR="${arg#*=}"
             ;;
         *)
             echo "❌ Error: Unknown option '$arg'"
@@ -40,16 +40,17 @@ if (( PORT < 1 || PORT > 65535 )); then
     exit 1
 fi
 
-if [[ -z "$PATH" ]]; then
-    PATH="$(pwd)"
-    echo "ℹ️ No path provided. Using current directory: $PATH"
+if [[ -z "$WSDIR" ]]; then
+    WSDIR="$(pwd)"
+    echo "ℹ️ No path provided. Using current directory: $WSDIR"
 fi
 
-cd "$PATH"
+cd "$WSDIR"
 echo "📁 Working directory: $(pwd)"
 
 echo "☄️  Starting local preview server on port ${PORT}..."
 
+export 
 
 if ! command -v pnpm &>/dev/null; then
     echo "🚨 Error: 'pnpm' is not installed or not in PATH. Please install it first."
