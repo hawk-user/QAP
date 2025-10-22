@@ -57,7 +57,7 @@ if lsof -i :"$PORT" &>/dev/null; then
 fi
 
 echo "🏗️  Building project..."
-if ! pnpm tsc && pnpm exec vite build --outDir dist; then
+if ! pnpm exec vite build --outDir dist; then
     echo "🚨 Build failed. Aborting."
     exit 1
 fi
