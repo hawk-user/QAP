@@ -28,7 +28,7 @@ jobs:
         with:
           workspace: test/system/functional/webapp
       - name: Start Local Preview Server
-        run: "./.github/scripts/starting.local.preview.server.sh --port=$URL"
+        run: "./.github/scripts/starting.local.preview.server.sh --port=$PORT"
       - uses: './.github/actions/setup-and-run-cypress'
         with:
           url: ${{ env.URL }}
