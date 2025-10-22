@@ -1,0 +1,28 @@
+name: Deploy Web Application
+on:
+  release:
+    types: [ published ]
+jobs:
+  deploy:
+    if: github.event.release.target_commitish == 'main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: webapp-dist
+          path: ./dist
+      - name: Extract build
+        run: unzip ./dist/webapp-dist.zip -d ./site
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
