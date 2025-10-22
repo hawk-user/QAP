@@ -17,9 +17,9 @@ runs:
       env:
         WORKSPACE: ${{ inputs.workspace }}
 
-    - name: Install all dependencies
+    - name: Ensure Cypress binary is installed
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: pnpm exec cypress install
 
     - name: Run Functional tests
       shell: bash
