@@ -34,7 +34,8 @@
               "shell": { "type": "string" },
               "run": { "type": "string" },
               "uses": { "type": "string" },
-              "with": { "type": "object", "additionalProperties": true }
+              "with": { "type": "object", "additionalProperties": true },
+              "env": { "type": "object", "additionalProperties": { "type": "string" } }
             },
             "anyOf": [
               { "required": ["run", "name"] },

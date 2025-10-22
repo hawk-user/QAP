@@ -12,12 +12,17 @@ runs:
   steps:
     - name: Move to the working directory
       shell: bash
-      run: cd "${{ inputs.workspace }}"
+      run: |
+        cd "$WORKSPACE" || { echo "Workspace not found"; exit 1; }
+      env:
+        WORKSPACE: ${{ inputs.workspace }}
+        
     - name: Ensure Cypress binary is installed
       shell: bash
-      run: pnpm cypress install
+      run: pnpm exec cypress install
+
     - name: Run Functional tests
       shell: bash
       env:
         CYPRESS_BASE_URL: ${{ inputs.url }}
-      run: pnpm cypress run --browser chrome
+      run: pnpm exec cypress run --browser chrome
