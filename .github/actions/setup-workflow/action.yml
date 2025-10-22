@@ -5,11 +5,17 @@ inputs:
     description: "Node.js version to use. The default version is version 22."
     required: false
     default: "22"
+  fetch-depth:
+    description: "Specifies how many commits to fetch when checking out the repository."
+    required: false
+    default: "1"
 runs:
   using: "composite"
   steps:
-    - name: Chekout repository
+    - name: Checkout repository
       uses: actions/checkout@v5
+      with:
+        fetch-depth: ${{ inputs.fetch-depth }}
     - name: Setup Node.js
       uses: actions/setup-node@v6
       with:

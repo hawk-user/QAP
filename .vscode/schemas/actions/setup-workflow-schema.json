@@ -13,9 +13,12 @@
         "type": "object",
         "required": ["description", "required"],
         "properties": {
-          "description": { "type": "string", "minLength": 1 },
+          "description": { 
+            "type": "string", 
+            "minLength": 1 
+          },
           "required": { "type": "boolean" },
-          "default": { "type": ["string","number","boolean"] }
+          "default": { "type": ["string", "number", "boolean"] }
         },
         "additionalProperties": false
       }
