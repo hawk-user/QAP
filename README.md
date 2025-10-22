@@ -78,7 +78,6 @@ This repository implements a modular GitHub Actions CI/CD architecture.
 
 The pipeline ensures reliable testing, building, and deployment through reusable workflows, clear dependencies, and optional manual triggers.
 
-
 ---
 
 <p>
