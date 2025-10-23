@@ -16,6 +16,8 @@ runs:
       shell: bash
       working-directory: ${{ inputs.workspace }}
       run: pnpm install --frozen-lockfile
+      env:
+        PNPM_SKIP_REVIEW: true
 
     - name: Ensure Cypress binary is installed
       shell: bash
