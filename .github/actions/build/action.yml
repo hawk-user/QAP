@@ -28,7 +28,6 @@ runs:
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
-      working-directory: ${{ inputs.workspace }}
       with:
         name: "${{ inputs.workspace }}-${{ inputs.output-dir }}"
         path: "${{ inputs.workspace }}/${{ inputs.output-dir }}"
