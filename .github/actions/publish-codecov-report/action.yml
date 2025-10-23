@@ -26,9 +26,8 @@ runs:
 
     - name: Upload results to Codecov
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
-      working-directory: ${{ inputs.workspace }}
       with:
         token: ${{ inputs.token }}
-        files: ${{ format('coverage/{0}', inputs.files) }}
+        files: ${{ format('{0}/coverage/{1}', inputs.workspace, inputs.files) }}
         disable_search: true
         fail_ci_if_error: true
