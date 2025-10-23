@@ -1,6 +1,7 @@
 name: Component Testing
 on:
   workflow_call:
+  workflow_dispatch:
   push:
     paths:
       - "libs/react-materials/**"
