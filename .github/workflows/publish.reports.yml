@@ -11,7 +11,7 @@ jobs:
   component-tests:
     runs-on: ubuntu-latest
     if: >
-      (github.event_name == 'push' && github.ref == 'refs/head/main')
+      (github.ref == 'refs/head/main')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
