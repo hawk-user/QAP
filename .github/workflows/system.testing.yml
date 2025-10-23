@@ -6,12 +6,12 @@ on:
     paths:
       - "webapp/**"
       - "test/system/functional/webapp/**"
-      - "libs/react-materials/**"
+      - "libs/react-material/**"
   pull_request:
     paths:
       - "webapp/**"
       - "test/system/functional/webapp/**"
-      - "libs/react-materials/**"
+      - "libs/react-material/**"
 env:
   PORT: 5080
   URL: "http://localhost:5080"

@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "libs/react-materials/**"
-      - "test/component/libs/react-materials/**"
+      - "libs/react-material/**"
+      - "test/component/libs/react-material/**"
   pull_request:
     paths:
-      - "libs/react-materials/**"
-      - "test/component/libs/react-materials/**"
+      - "libs/react-material/**"
+      - "test/component/libs/react-material/**"
 permissions:
   contents: read
 jobs:
@@ -21,7 +21,7 @@ jobs:
       - uses: './.github/actions/setup-workflow'
       - uses: './.github/actions/setup-workspace'
         with:
-          workspace: test/component/libs/react-materials
+          workspace: test/component/libs/react-material
       - name: Run component tests
-        working-directory: test/component/libs/react-materials
+        working-directory: test/component/libs/react-material
         run: pnpm test:component --runInBand

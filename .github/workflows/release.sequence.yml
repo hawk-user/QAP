@@ -4,7 +4,7 @@ on:
     paths:
       - "webapp/**"
       - "test/system/functional/webapp/**"
-      - "libs/react-materials/**"
+      - "libs/react-material/**"
 concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true

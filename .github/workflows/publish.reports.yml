@@ -2,8 +2,8 @@ name: Publish Reports
 on:
   push:
     paths:
-      - 'libs/react-materials/**'
-      - 'test/component/libs/react-materials/**'
+      - 'libs/react-material/**'
+      - 'test/component/libs/react-material/**'
 permissions:
   contents: read
 jobs:
@@ -17,9 +17,9 @@ jobs:
       - uses: './.github/actions/setup-workflow'
       - uses: './.github/actions/setup-workspace'
         with:
-          workspace: test/component/libs/react-materials
+          workspace: test/component/libs/react-material
       - uses: './.github/actions/publish-codecov-report'
         with:
-          workspace: test/component/libs/react-materials
+          workspace: test/component/libs/react-material
           files: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
