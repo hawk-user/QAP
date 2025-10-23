@@ -57,4 +57,4 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm exec semantic-release --config ./.github/.releaserc.json
+        run: npx semantic-release --config ./.github/.releaserc.json
