@@ -1,0 +1,14 @@
+name: "Setup Workspace"
+description: "Install all dependencies for a workspace."
+inputs:
+  workspace:
+    description: "Specify the working directory in which to install all dependencies. The default value is the project root."
+    required: false
+    default: "./"
+runs:
+  using: "composite"
+  steps:
+    - name: Install the necessary dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: ${{ inputs.workspace }}
+      shell: bash

@@ -60,3 +60,14 @@ $RECYCLE.BIN/
 
 # Coverage reports
 **/coverage/
+
+# Backup files for VS Code
+.vscode/*
+
+# VS Code settings required for YAML autocompletion and lint
+!.vscode/settings.json
+
+# JSON schemas to validate GitHub Actions inputs
+!.vscode/schemas/
+!.vscode/schemas/actions/
+!.vscode/schemas/actions/**

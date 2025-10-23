@@ -1,0 +1,16 @@
+{
+  "branches": [ "main" ],
+  "plugins": [
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          { 
+            "path": "dist/webapp-dist.zip",
+            "label": "Webapp Build" 
+          }
+        ]
+      }
+    ]
+  ]
+}
