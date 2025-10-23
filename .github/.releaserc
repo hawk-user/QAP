@@ -1,13 +1,19 @@
 {
-  "branches": [ "main" ],
+  "branches": ["main"],
   "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular"
+      }
+    ],
     [
       "@semantic-release/github",
       {
         "assets": [
-          { 
+          {
             "path": "dist/webapp-dist.zip",
-            "label": "Webapp Build" 
+            "label": "Webapp Build"
           }
         ]
       }
