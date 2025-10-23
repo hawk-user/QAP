@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   manual-quality-gate:
-    if: (github.ref == 'refs/head/main')
+    if: (github.ref == 'refs/heads/main')
     uses: ./.github/workflows/manual.quality.gate.yml
   component-testing:
     needs: [ manual-quality-gate ]
