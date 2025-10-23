@@ -1,5 +1,6 @@
 name: Publish Reports
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'libs/react-material/**'
