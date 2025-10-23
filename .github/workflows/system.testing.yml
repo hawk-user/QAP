@@ -1,6 +1,12 @@
 name: System Testing
 on:
   workflow_call:
+  workflow_dispatch:
+  push:
+    paths:
+      - "webapp/**"
+      - "test/system/functional/webapp/**"
+      - "libs/react-materials/**"
   pull_request:
     paths:
       - "webapp/**"
