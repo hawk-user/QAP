@@ -35,7 +35,8 @@
               "run": { "type": "string" },
               "uses": { "type": "string" },
               "with": { "type": "object", "additionalProperties": true },
-              "env": { "type": "object", "additionalProperties": { "type": "string" } }
+              "env": { "type": "object", "additionalProperties": { "type": "string" } },
+              "working-directory": { "type": "string" }
             },
             "anyOf": [
               { "required": ["run", "name"] },

@@ -15,18 +15,20 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Move to the working directory
+    - name: Install dependencies
       shell: bash
-      run: |
-        cd "$WORKSPACE" || { echo "Workspace not found"; exit 1; }
-      env:
-        WORKSPACE: ${{ inputs.workspace }}
+      working-directory: ${{ inputs.workspace }}
+      run: pnpm install --frozen-lockfile
+      
     - name: Run build
       shell: bash
+      working-directory: ${{ inputs.workspace }}
       run: |
         ${{ inputs.command-to-build }} ${{ inputs.output-dir }}
+
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
+      working-directory: ${{ inputs.workspace }}
       with:
         name: "${{ inputs.workspace }}-${{ inputs.output-dir }}"
         path: "${{ inputs.workspace }}/${{ inputs.output-dir }}"

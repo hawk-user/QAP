@@ -14,7 +14,8 @@
         "required": ["description", "required"],
         "properties": {
           "description": { "type": "string", "minLength": 1 },
-          "required": { "type": "boolean" }
+          "required": { "type": "boolean" },
+          "default": { "type": ["string", "number", "boolean"] }
         },
         "additionalProperties": false
       }
@@ -35,11 +36,12 @@
               "run": { "type": "string" },
               "uses": { "type": "string" },
               "with": { "type": "object", "additionalProperties": true },
-              "env": { "type": "object", "additionalProperties": { "type": "string" } }
+              "env": { "type": "object", "additionalProperties": { "type": "string" } },
+              "working-directory": { "type": "string" }
             },
             "anyOf": [
-              { "required": ["run", "name"] },
-              { "required": ["uses", "name"] }
+              { "required": ["name", "run"] },
+              { "required": ["name", "uses"] }
             ],
             "allOf": [
               {

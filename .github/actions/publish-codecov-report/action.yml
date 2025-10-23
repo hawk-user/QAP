@@ -13,19 +13,20 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Move to the working directory
+
+    - name: Install dependencies
       shell: bash
-      run: |
-        cd "$WORKSPACE" || { echo "Workspace not found"; exit 1; }
-      env:
-        WORKSPACE: ${{ inputs.workspace }}
+      working-directory: ${{ inputs.workspace }}
+      run: pnpm install --frozen-lockfile
         
     - name: Output a Coverage report
       shell: bash
+      working-directory: ${{ inputs.workspace }}
       run: pnpm test:coverage --runInBand
 
     - name: Upload results to Codecov
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+      working-directory: ${{ inputs.workspace }}
       with:
         token: ${{ inputs.token }}
         files: ${{ format('coverage/{0}', inputs.files) }}
