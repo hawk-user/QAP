@@ -30,6 +30,5 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: "${{ inputs.workspace }}-${{ inputs.output-dir }}"
-        path: "${{ inputs.workspace }}/${{ inputs.output-dir }}"
-        archive-format: zip
+        path: "${{ inputs.workspace }}/source/${{ inputs.output-dir }}"
         retention-days: 1
