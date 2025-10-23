@@ -34,7 +34,7 @@ jobs:
       - uses: './.github/actions/build'
         with:
           workspace: webapp
-          command-to-build: pnpm tsc && vite build --outDir
+          command-to-build: pnpm exec vite build --outDir
           output-dir: dist
   release:
     needs: [ build ]
