@@ -1,5 +1,6 @@
 name: Release Sequence
 on:
+  workflow_dispatch:
   push:
     paths:
       - "webapp/**"
