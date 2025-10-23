@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+if git diff --cached --name-only | grep -q '^\.github/'; then
+    echo "⚡️ Changes in .github/, running actionlint..."
+    pnpm actionlint
+fi
+
+echo "[pre-commit]: 🫣 Everything is going wonderfully!"

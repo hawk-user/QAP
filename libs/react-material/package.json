@@ -1,7 +1,7 @@
 {
   "name": "@libs/react-material",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "source/index.js",
   "types": "dist/index.d.ts",

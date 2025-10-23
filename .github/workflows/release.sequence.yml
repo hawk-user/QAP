@@ -1,0 +1,59 @@
+name: Release Sequence
+on:
+  push:
+    paths:
+      - "webapp/**"
+      - "test/system/functional/webapp/**"
+      - "libs/react-materials/**"
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  manual-quality-gate:
+    if: (github.ref == 'refs/head/main')
+    uses: ./.github/workflows/manual.quality.gate.yml
+  component-testing:
+    needs: [ manual-quality-gate ]
+    uses: ./.github/workflows/component.testing.yml
+  system-testing:
+    needs: [ component-testing ]
+    uses: ./.github/workflows/system.testing.yml
+  build:
+    needs: [ system-testing ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - uses: './.github/actions/setup-workflow'
+      - uses: './.github/actions/setup-workspace'
+        with:
+          workspace: webapp
+      - uses: './.github/actions/build'
+        with:
+          workspace: webapp
+          command-to-build: pnpm tsc && vite build --outDir
+          output-dir: dist
+  release:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: './.github/actions/setup-workflow'
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: webapp-dist
+          path: ./dist
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm dlx semantic-release --config ./.github/.releaserc

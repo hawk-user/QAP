@@ -1,0 +1,36 @@
+name: "Build"
+description: "Generic build action that runs a build command in a specific directory"
+
+inputs:
+  workspace:
+    description: "The location of the workspace."
+    required: true
+  command-to-build:
+    description: "The build command to execute (eg. 'pnpm tsc && vite build --outDir')."
+    required: true
+  output-dir:
+    description: "Path to the build output folder."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ inputs.workspace }}
+      run: pnpm install --frozen-lockfile
+      
+    - name: Run build
+      shell: bash
+      working-directory: ${{ inputs.workspace }}
+      run: |
+        ${{ inputs.command-to-build }} ${{ inputs.output-dir }}
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      working-directory: ${{ inputs.workspace }}
+      with:
+        name: "${{ inputs.workspace }}-${{ inputs.output-dir }}"
+        path: "${{ inputs.workspace }}/${{ inputs.output-dir }}"
+        archive-format: zip
+        retention-days: 1

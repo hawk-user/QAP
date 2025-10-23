@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Setup And Run Cypress Action Schema",
+  "type": "object",
+  "required": ["name", "description", "inputs", "runs"],
+  "properties": {
+    "name": { "type": "string", "const": "Setup And Run Cypress" },
+    "description": { "type": "string", "minLength": 1 },
+    "inputs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["description", "required"],
+        "properties": {
+          "description": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" },
+          "default": { "type": ["string", "number", "boolean"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "runs": {
+      "type": "object",
+      "required": ["using", "steps"],
+      "properties": {
+        "using": { "type": "string", "enum": ["composite"] },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "shell": { "type": "string" },
+              "run": { "type": "string" },
+              "uses": { "type": "string" },
+              "with": { "type": "object", "additionalProperties": true },
+              "env": { "type": "object", "additionalProperties": { "type": ["string", "boolean"] } },
+              "working-directory": { "type": "string" }
+            },
+            "anyOf": [
+              { "required": ["name", "run"] },
+              { "required": ["name", "uses"] }
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

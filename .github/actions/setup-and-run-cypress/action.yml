@@ -1,0 +1,30 @@
+name: "Setup And Run Cypress"
+description: "Configure and install Cypress correctly, then launch it."
+
+inputs:
+  url:
+    description: "The URL on which the tests are performed."
+    required: true
+  workspace:
+    description: "The location of the workspace."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ inputs.workspace }}
+      run: pnpm install --frozen-lockfile
+
+    - name: Ensure Cypress binary is installed
+      shell: bash
+      working-directory: ${{ inputs.workspace }}
+      run: pnpm exec cypress install
+
+    - name: Run Functional tests
+      shell: bash
+      working-directory: ${{ inputs.workspace }}
+      env:
+        CYPRESS_BASE_URL: ${{ inputs.url }}
+      run: pnpm exec cypress run --browser chrome

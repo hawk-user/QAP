@@ -1,0 +1,25 @@
+name: Component Testing
+on:
+  workflow_call:
+  pull_request:
+    paths:
+      - "libs/react-materials/**"
+      - "test/component/libs/react-materials/**"
+permissions:
+  contents: read
+jobs:
+  component-tests:
+    runs-on: ubuntu-latest
+    if: >
+      (github.event_name == 'push' && github.ref == 'refs/head/main') ||
+      (github.event_name == 'pull_request' && github.base_ref != 'main')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - uses: './.github/actions/setup-workflow'
+      - uses: './.github/actions/setup-workspace'
+        with:
+          workspace: test/component/libs/react-materials
+      - name: Run component tests
+        working-directory: test/component/libs/react-materials
+        run: pnpm test:component --runInBand
